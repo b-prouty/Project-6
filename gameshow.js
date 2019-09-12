@@ -37,6 +37,28 @@ function addPhraseToDisplay(arr) {
   }
 }
 
+function checkLetter(clickedLetter){
+  let letters = document.getElementsByClassName('letter');
+  for (i = 0; i < letters.length; i ++) {
+    if(clickedLetter === letters[i].textContent) {
+      letters[i].classList.add('show');
+      return letters[i];
+    } else {
+      return null;
+    }
+  }
+}
+
 
 const phraseArray = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(phraseArray);
+
+
+qwerty.addEventListener('click', (e) => {
+  if (e.target.tagName === 'BUTTON') {
+    const chosen = e.target;
+    chosen.classList.add('chosen');
+    chosen.setAttribute("disabled", true);
+    checkLetter(chosen.value);
+  }
+});
