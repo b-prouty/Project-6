@@ -40,7 +40,7 @@ function addPhraseToDisplay(arr) {
 function checkLetter(clickedLetter){
   let letters = document.getElementsByClassName('letter');
   for (i = 0; i < letters.length; i ++) {
-    if(clickedLetter === letters[i].textContent) {
+    if (clickedLetter === letters[i]) {
       letters[i].classList.add('show');
       return letters[i];
     } else {
@@ -59,6 +59,6 @@ qwerty.addEventListener('click', (e) => {
     const chosen = e.target;
     chosen.classList.add('chosen');
     chosen.setAttribute("disabled", true);
-    checkLetter(chosen.value);
+    checkLetter(chosen);
   }
 });
