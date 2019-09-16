@@ -2,8 +2,9 @@ const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 let missed = 0;
 const overlay = document.getElementById('overlay');
+let live = document.getElementsByClassName('tries')[0];
 const startButton = document.querySelector('a.btn__reset');
-const scoreboard = document.getElementById('scoreboard');
+
 const phrases = [
   'A fish out of water',
   'Break a leg',
@@ -62,6 +63,7 @@ qwerty.addEventListener('click', (e) => {
     let letterFound = checkLetter(chosen.textContent);
     if(letterFound === null){
       missed += 1;
+      live.style.display = 'none';
     }
   }
 });
