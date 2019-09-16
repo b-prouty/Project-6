@@ -36,7 +36,7 @@ function addPhraseToDisplay(arr) {
     }
   }
 }
-let match = false;
+let match = null;
 function checkLetter(clickedLetter){
   let letters = document.getElementsByClassName('letter');
   for (i = 0; i < letters.length; i ++) {
@@ -45,9 +45,8 @@ function checkLetter(clickedLetter){
       match = true;
     }
   }
-  if(!match){
-    return null;
-  }
+
+    return match;
 }
 
 
@@ -60,6 +59,9 @@ qwerty.addEventListener('click', (e) => {
     const chosen = e.target;
     chosen.classList.add('chosen');
     chosen.setAttribute("disabled", true);
-    checkLetter(chosen.textContent);
+    var letterFound = checkLetter(chosen.textContent);
+    if(letterFound === null){
+      missed += 1;
+    }
   }
 });
