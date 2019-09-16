@@ -30,22 +30,23 @@ function addPhraseToDisplay(arr) {
     li.textContent = character;
     ul.appendChild(li);
     if (character === ' '){
-      li.className = '';
+      li.className = 'space';
     } else {
       li.className = 'letter';
     }
   }
 }
-
+let match = false;
 function checkLetter(clickedLetter){
   let letters = document.getElementsByClassName('letter');
   for (i = 0; i < letters.length; i ++) {
-    if (clickedLetter === letters[i]) {
+    if (clickedLetter === letters[i].textContent.toLowerCase()) {
       letters[i].classList.add('show');
-      return letters[i];
-    } else {
-      return null;
+      match = true;
     }
+  }
+  if(!match){
+    return null;
   }
 }
 
@@ -59,6 +60,6 @@ qwerty.addEventListener('click', (e) => {
     const chosen = e.target;
     chosen.classList.add('chosen');
     chosen.setAttribute("disabled", true);
-    checkLetter(chosen);
+    checkLetter(chosen.textContent);
   }
 });
