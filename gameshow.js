@@ -2,8 +2,8 @@ const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 let missed = 0;
 const overlay = document.getElementById('overlay');
-const startButton =
-document.querySelector('a.btn__reset');
+const startButton = document.querySelector('a.btn__reset');
+const scoreboard = document.getElementById('scoreboard');
 const phrases = [
   'A fish out of water',
   'Break a leg',
@@ -36,8 +36,9 @@ function addPhraseToDisplay(arr) {
     }
   }
 }
-let match = null;
+
 function checkLetter(clickedLetter){
+  let match = null;
   let letters = document.getElementsByClassName('letter');
   for (i = 0; i < letters.length; i ++) {
     if (clickedLetter === letters[i].textContent.toLowerCase()) {
@@ -45,7 +46,6 @@ function checkLetter(clickedLetter){
       match = true;
     }
   }
-
     return match;
 }
 
@@ -59,7 +59,7 @@ qwerty.addEventListener('click', (e) => {
     const chosen = e.target;
     chosen.classList.add('chosen');
     chosen.setAttribute("disabled", true);
-    var letterFound = checkLetter(chosen.textContent);
+    let letterFound = checkLetter(chosen.textContent);
     if(letterFound === null){
       missed += 1;
     }
