@@ -2,7 +2,7 @@ const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 let missed = 0;
 const overlay = document.getElementById('overlay');
-let live = document.getElementsByClassName('tries')[0];
+const lives = document.getElementsByClassName('tries');
 const startButton = document.querySelector('a.btn__reset');
 
 const phrases = [
@@ -50,6 +50,21 @@ function checkLetter(clickedLetter){
     return match;
 }
 
+function checkWin(){
+  let showLetters = document.querySelectorAll('.show');
+  let allLetters = document.querySelectorAll('.letter');
+  if ( allLetters.length === showLetters.length){
+    overlay.style.display = 'flex';
+    overlay.className = 'win';
+    startButton.style.display = 'none';
+    startButton.previousElementSibling.textContent = 'YOU WON!';
+  } else if (missed === 5){
+    overlay.style.display = 'flex';
+    overlay.className = 'lose';
+    startButton.style.display = 'none';
+    startButton.previousElementSibling.textContent = 'YOU LOST...';
+  }
+}
 
 const phraseArray = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(phraseArray);
@@ -63,7 +78,10 @@ qwerty.addEventListener('click', (e) => {
     let letterFound = checkLetter(chosen.textContent);
     if(letterFound === null){
       missed += 1;
-      live.style.display = 'none';
+      var ol = document.querySelector('ol');
+      ol.removeChild(ol.firstElementChild);
     }
+       checkWin();
   }
+
 });
